@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import wordList from './wordList.json';
-import { Textfit } from 'react-textfit' // https://www.npmjs.com/package/react-textfit for instructions
+import { createRoot } from 'react-dom/client';
 
 /*TODO:
     
@@ -239,9 +238,9 @@ class Game extends React.Component {
                 <div className="game">
                     <div className="question-container">
                         <div className="question-kanji japanese">
-                            <Textfit mode="single" max="200" className="question-text">
+                            <div className="question-text">
                                 {kanji}
-                            </Textfit>
+                            </div>
                         </div>
                         <button
                             id="finalize-button"
@@ -283,9 +282,9 @@ class Game extends React.Component {
                 <div className="game">
                     <div className="question-container">
                         <div className="question-kana japanese">
-                            <Textfit mode="single" max="200" className="question-text">
+                            <div className="question-text">
                                 {kana}
-                            </Textfit>
+                            </div>
                         </div>
                         <button
                             id="finalize-button"
@@ -315,7 +314,7 @@ class Game extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <Game />,
-    document.getElementById("root")
+const root = createRoot(document.getElementById("root"));
+root.render(
+    <Game />
 );
