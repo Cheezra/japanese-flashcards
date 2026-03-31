@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Japanese Flashcards
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application for practicing Japanese vocabulary. Each round displays a Japanese word (in kanji or kana) and challenges the user to identify the correct reading and English translation from multiple-choice answers.
 
-## Available Scripts
+### Necessary Knowledge
 
-In the project directory, you can run:
+The application assumes that the user can read both types of kana (hiragana and katakana). There are several methods to learn how to read these quickly, such as Duolingo or Japanese learning textbooks.
 
-### `npm start`
+## How It Works
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- A Japanese word is displayed prominently on the flashcard. It will display in **kanji** if it exists, and in **kana** otherwise
+- If the word has kanji, the user must select **both** the correct kana reading and the correct English translation from two separate sets of 5 choices
+![Flashcard page showing kanji and both selection boxes](https://github.com/Cheezra/japanese-flashcards/tree/main/assets/README1.png)
+- If the word is kana-only, the user selects only the correct **English translation** from one set of choices
+![Flashcard page showing kana and only one selection box](https://github.com/Cheezra/japanese-flashcards/tree/main/assets/README2.png)
+- Once all required answers are selected, the **Finalize Answers** button activates
+- After finalizing, correct and incorrect choices are color-highlighted and the user can advance to the next question
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Answer choices are randomly shuffled each round, with the correct answer placed at a random position among the incorrect answers.
 
-### `npm test`
+## Project Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+japanese-flashcards/
+├── public/
+├── src/
+│   ├── index.js        # Game, AnswerChoices, and Word classes
+│   ├── index.css       # Styles
+│   └── wordList.json   # Word bank (kanji, kana, english fields per entry)
+├── package.json
+└── .gitignore
+```
 
-### `npm run build`
+## Key Components & Classes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**`Word`** — Represents a vocabulary entry with `kanji`, `kana`, and `english` fields. Contains static helpers for:
+- Parsing the word list from `wordList.json` (`loadWordsFromJSONFile`)
+- Generating randomized multiple-choice answer sets (`getAnswerChoices`)
+- Locating the correct answer within a choices array (`findCorrectIndex`)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**`AnswerChoices`** — Renders a set of answer buttons that visually reflect their current state: neutral, selected (pre-finalize), correct, or incorrect (post-finalize).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**`Game`** — The root React component managing all game state: the current word, chosen answers, finalization status, and advancing to the next random question.
 
-### `npm run eject`
+## Word List Format
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Words are stored in `wordList.json` with the following structure:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```json
+{
+  "words": [
+    { "kanji": "日本語", "kana": "にほんご", "english": "Japanese" },
+    { "kanji": "", "kana": "そうです", "english": "That's right." },
+    ...
+  ]
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Words with an empty `kanji` field are treated as kana-only and show a single answer box instead of two.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Getting Started
 
-## Learn More
+### Prerequisites
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Node.js](https://nodejs.org/) (v17 or later)
+- npm (v8 or later)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Installation
 
-### Code Splitting
+```bash
+git clone https://github.com/Cheezra/japanese-flashcards.git
+cd japanese-flashcards
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Running the App
 
-### Analyzing the Bundle Size
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Making a Progressive Web App
+## Planned Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Win/loss statistics tracking, separated by English and Japanese question types
+- Start screen
+- Responsive layout for different screen sizes and orientations
+- In-app screen for adding new words
