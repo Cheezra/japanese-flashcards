@@ -10,9 +10,9 @@ The application assumes that the user can read both types of kana (hiragana and 
 
 - A Japanese word is displayed prominently on the flashcard. It will display in **kanji** if it exists, and in **kana** otherwise
 - If the word has kanji, the user must select **both** the correct kana reading and the correct English translation from two separate sets of 5 choices
-![Flashcard page showing kanji and both selection boxes](https://github.com/Cheezra/japanese-flashcards/tree/main/assets/README1.png)
+![Flashcard page showing kanji and both selection boxes](https://github.com/Cheezra/japanese-flashcards/blob/main/assets/README1.png)
 - If the word is kana-only, the user selects only the correct **English translation** from one set of choices
-![Flashcard page showing kana and only one selection box](https://github.com/Cheezra/japanese-flashcards/tree/main/assets/README2.png)
+![Flashcard page showing kana and only one selection box](https://github.com/Cheezra/japanese-flashcards/blob/main/assets/README2.png)
 - Once all required answers are selected, the **Finalize Answers** button activates
 - After finalizing, correct and incorrect choices are color-highlighted and the user can advance to the next question
 
