@@ -24,9 +24,13 @@ Answer choices are randomly shuffled each round, with the correct answer placed 
 japanese-flashcards/
 ├── public/
 ├── src/
-│   ├── index.js        # Game, AnswerChoices, and Word classes
+│   ├── components      # Stores all necessary UI components
+│   ├── data            # Stores helper functions and classes
+│   ├── logic           # Houses the central game logic
+│   ├── index.js        # Entry point for the game
 │   ├── index.css       # Styles
 │   └── wordList.json   # Word bank (kanji, kana, english fields per entry)
+│
 ├── package.json
 └── .gitignore
 ```

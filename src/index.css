@@ -115,7 +115,7 @@
     width: 100%;
 }
 
-#finalize-button {
+#finalize-button, #next-button {
     width: 25%;
     position: absolute;
     right: 20px;
@@ -137,7 +137,7 @@
     background-color: #fff;
 }
 
-.game {
+.game-component {
     display: flex;
     flex-direction: row-reverse;
 }
