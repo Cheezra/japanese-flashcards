@@ -12,7 +12,6 @@ Other nonessential goals:
     Create a start screen
     Change layout depending on screen size and shape
     Create a screen to add new words while in the app
-    Decrease the font size of the english answers when applicable **Might not be necessary** - the box already auto extends to a certain point
 */
 
 const loadWordsFromJSON = (wordList) => {
@@ -100,28 +99,32 @@ export default function Game() {
                 handleFinalize={finalizeAnswers}
                 handleNext={nextCard}
                 finalized={finalized}
+                kana={!hasKanji}
             >
                 {hasKanji ? deck[deckIndex].kanji : deck[deckIndex].kana}
             </QuestionContainer>
-            {hasKanji && (
+            <div className="answer-section">
+                {hasKanji && (
+                    <AnswerChoices 
+                        answers={answersKana}
+                        kana={true}
+                        chosen={chosenKana}
+                        finalized={finalized}
+                        correct={deck[deckIndex]}
+                        handleSelect={handleSelectKana}
+                    />
+                )}
+                
                 <AnswerChoices 
-                    answers={answersKana}
-                    kana={true}
-                    chosen={chosenKana}
+                    answers={answersEnglish}
+                    kana={false}
+                    chosen={chosenEnglish}
                     finalized={finalized}
                     correct={deck[deckIndex]}
-                    handleSelect={handleSelectKana}
+                    handleSelect={handleSelectEnglish}
                 />
-            )}
+            </div>
             
-            <AnswerChoices 
-                answers={answersEnglish}
-                kana={false}
-                chosen={chosenEnglish}
-                finalized={finalized}
-                correct={deck[deckIndex]}
-                handleSelect={handleSelectEnglish}
-            />
         </GameComponent>
     );
 }

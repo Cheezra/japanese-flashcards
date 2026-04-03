@@ -1,23 +1,47 @@
-.japanese {
-    font-family: '游明朝', 'Yu Mincho', "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-    font-size: 25px;
+@import url('https://fonts.googleapis.com/css2?family=Klee+One&family=Quicksand:wght@300..700&display=swap');
+
+:root {
+    --primary-color: #CC7677;
+    --secondary-color: #FADBBE;
+    --text-color: #2E2F36;
+    --accent-color: #AA5258;
+    --correct-bg: rgba(160, 220, 160, 0.644);
+    --correct-border: rgba(80, 180, 80, 0.815);
+    --correct-shadow: rgba(60, 150, 60, 0.15);
+    --incorrect-bg: rgba(245, 106, 106, 0.678);
+    --incorrect-border: rgba(163, 68, 68, 0.877);
+    --incorrect-shadow: rgba(180, 60, 60, 0.12);
 }
 
-.prompt{
-    font: "Century Gothic", Futura, sans-serif;
-    font-size: 20px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.japanese {
+    font-family: "Klee One", cursive;
+    /* font-size: 50px;
+    font-weight: 400; */
+    font-style: normal;
 }
 
 .english {
-    font: "Century Gothic", Futura, sans-serif;
+    font-family: "Quicksand", sans-serif;
+    font-style: normal;
+}
+
+.prompt {
     font-size: 20px;
+    font-weight: 500;
 }
 
 .question-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
-    width: 80%;
+    align-items: last baseline;
+    width: 100%;
     clear: both;
     position: relative;
 }
@@ -25,119 +49,150 @@
 .question-text {
     padding-left: 20px;
     padding-right: 20px;
+    font-weight: 500;
+    user-select: none;
+    color: var(--text-color);
+    /* White drop shadow on the text to help stand out*/
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.75);
 }
 
-.question-kanji {
-    background: #fff;
+.question-kanji, .question-kana {
+    background: color-mix(in srgb, var(--secondary-color), transparent 10%);
     border: 1px solid #999;
-    border-radius: 20px;
+    border-radius: 24px;
+    align-items: center;
+    position: relative;
     float: left;
     margin: auto;
     font-weight: normal;
     line-height: 250px;
     height: 250px;
-    width: 30%;
+    width: 45%;
+    border: 2px solid var(--secondary-color);
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.08);
 }
 
-.question-kana {
-    background: #fff;
-    border: 1px solid #999;
-    border-radius: 20px;
-    float: left;
-    margin: auto;
-    padding-left: 10px;
-    padding-right: 10px;
-    text-align: center;
-    width: 40%;
+.answer-section {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
 }
 
 .answer-container {
     display: flex;
     flex-direction: column;
-    padding-right: 30px;
 }
 
 .answer-box {
     padding-top: 10px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
-.answer-box .answer {
-    background: #fff;
-    border: 1px solid #999;
+.answer.english {
+    letter-spacing: 0.15em;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.answer.japanese {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.answer {
+    background: color-mix(in srgb, var(--secondary-color), transparent 35%);
+    border: 2px solid color-mix(in srgb, var(--secondary-color), transparent 15%);
     border-radius: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 40px;
-    height: 40px;
+    padding: 14px 10px;
+    cursor: pointer;
+    color: var(--text-color);
     text-align: center;
+    transition: all 0.15s ease;
+    height: 60px;
     width: 100%;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.07);
 }
 
-.answer:hover {
-    background: #ccc;
+.answer:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.15);
+}
+.answer:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.12);
 }
 
-.answer-chosen {
-    background: rgb(169, 192, 245);
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 40px;
-    height: 40px;
-    text-align: center;
-    width: 100%;
+.chosen {
+    background: color-mix(in srgb, var(--secondary-color), transparent 5%);
 }
 
-.answer-correct {
-    background: #2c7;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 40px;
-    height: 40px;
-    text-align: center;
-    width: 100%;
+.correct {
+    background: var(--correct-bg);
+    border-color: var(--correct-border);
+    box-shadow: 3px 3px 0px var(--correct-shadow);
 }
 
-.answer-incorrect {
-    background: #d35;
-    border: 1px solid #999;
-    border-radius: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 40px;
-    height: 40px;
-    text-align: center;
-    width: 100%;
+.incorrect {
+    background: var(--incorrect-bg);
+    border-color: var(--incorrect-border);
+    box-shadow: 3px 3px 0px var(--incorrect-shadow);
 }
 
-#finalize-button, #next-button {
+.answer:disabled {
+    cursor: default;
+}
+
+.answer:not(.correct):not(.incorrect):disabled {
+    /* color: color-mix(in srgb, var(--text-color), transparent 20%); */
+    opacity: 0.7;
+}
+
+.finalize-button, .next-button {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
     width: 25%;
     position: absolute;
     right: 20px;
     bottom: 10px;
     text-align: center;
-    border: 2px solid #999;
-    border-radius: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
+    border: none;
+    border-radius: 30px;
+    padding: 0 10px;
     line-height: 40px;
-    height: 50px;
+    height: 100px;
+    transition: all 0.15s ease;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+    color: var(--text-color);
+    background-color: var(--secondary-color);
 }
-
-.ready-to-submit {
-    background-color: rgb(68, 111, 240);
+.finalize-button:hover:not(:disabled), .next-button:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.15);
 }
-
-.not-ready {
-    background-color: #fff;
+.finalize-button:active:not(:disabled), .next-button:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.12);
+}
+.finalize-button:disabled, .next-button:disabled {
+    background-color: color-mix(in srgb, var(--secondary-color), transparent 80%);
+    color: color-mix(in srgb, var(--text-color), transparent 80%);
+    cursor: default;
 }
 
 .game-component {
+    background-color: var(--primary-color);
+    position: relative;
+    padding: 28px 18px;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
 }

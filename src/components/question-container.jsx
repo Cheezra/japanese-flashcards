@@ -1,11 +1,17 @@
 import '../index.css';
 
-export default function QuestionContainer({readyToFinalize, handleFinalize, handleNext, finalized, children}) {
+export default function QuestionContainer({readyToFinalize, handleFinalize, handleNext, finalized, kana, children}) {
+    
+    // calculate the size of the question font
+    // calculated based on text length
+    // max size is 100px
+    const fontSize = Math.floor(Math.min(100, 540 / children.length));
+    
     return (
         <>
             <div className="question-container">
-                <div className="question-kanji japanese">
-                    <div className="question-text">{children}</div>
+                <div className={`question-${kana ? "kana" : "kanji"} japanese`}>
+                    <div className="question-text" style={{fontSize: fontSize}}>{children}</div>
                 </div>
                 {finalized ? (
                     <button 
@@ -19,7 +25,8 @@ export default function QuestionContainer({readyToFinalize, handleFinalize, hand
                     <button 
                         id='finalize-button'
                         onClick={() => handleFinalize()}
-                        className={(readyToFinalize ? "ready-to-submit" : "not ready") + "english"}
+                        className="finalize-button english"
+                        disabled={!readyToFinalize}
                     >
                         Finalize Answers
                     </button>

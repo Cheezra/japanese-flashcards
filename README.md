@@ -1,6 +1,6 @@
 # Japanese Flashcards
 
-A React application for practicing Japanese vocabulary. Each round displays a Japanese word (in kanji or kana) and challenges the user to identify the correct reading and English translation from multiple-choice answers.
+A React application for practicing Japanese vocabulary in a flashcard format. Each round displays a Japanese word (in kanji or kana) and challenges the user to identify the correct reading and English translation from multiple-choice answers.
 
 ### Necessary Knowledge
 
@@ -14,28 +14,30 @@ The application assumes that the user can read both types of kana (hiragana and 
 - If the word is kana-only, the user selects only the correct **English translation** from one set of choices
 ![Flashcard page showing kana and only one selection box](https://github.com/Cheezra/japanese-flashcards/blob/main/assets/README2.png)
 - Once all required answers are selected, the **Finalize Answers** button activates
+![Flashcard page showing an activated 'Finalize Answers' button](https://github.com/Cheezra/japanese-flashcards/blob/main/assets/README3.png)
 - After finalizing, correct and incorrect choices are color-highlighted and the user can advance to the next question
+![Flashcard page showing color-highlighted feedback](https://github.com/Cheezra/japanese-flashcards/blob/main/assets/README4.png)
 
 Answer choices are randomly shuffled each round, with the correct answer placed at a random position among the incorrect answers.
 
 ## Project Structure
 
 ```
-japanese-flashcards/
-├── public/
-├── src/
-│   ├── components      # Stores all necessary UI components
-│   ├── data            # Stores helper functions and classes
-│   ├── logic           # Houses the central game logic
-│   ├── index.js        # Entry point for the game
-│   ├── index.css       # Styles
-│   └── wordList.json   # Word bank (kanji, kana, english fields per entry)
-│
-├── package.json
-└── .gitignore
+src/
+├── index.js                  # App entry point
+├── index.css                 # Global styles and CSS variables
+├── wordList.json             # Current vocabulary dataset (391 words)
+├── logic/
+│   └── game.jsx              # Core game state and logic
+├── components/
+│   ├── game-component.jsx    # Root layout wrapper
+│   ├── question-container.jsx # Displays the current card, Finalize, and Next buttons
+│   └── answer-choices.jsx    # Renders a set of 5 answer buttons
+└── data/
+    └── word.jsx              # Word class with helper functions
 ```
 
-## Key Components & Classes
+## Key Components
 
 **`Word`** — Represents a vocabulary entry with `kanji`, `kana`, and `english` fields. Contains static helpers for:
 - Parsing the word list from `wordList.json` (`loadWordsFromJSONFile`)
@@ -45,6 +47,12 @@ japanese-flashcards/
 **`AnswerChoices`** — Renders a set of answer buttons that visually reflect their current state: neutral, selected (pre-finalize), correct, or incorrect (post-finalize).
 
 **`Game`** — The root React component managing all game state: the current word, chosen answers, finalization status, and advancing to the next random question.
+
+**`game.jsx`**: Handles the core game logic and passes necessary state variables to the requisite components. Tracks progression logic, the current deck, the set of answers in both `kana` and `english`, and the current card. The `readyToFinalize` and `finalized` state variables determine if all necessary answers have been selected, and if the user has locked in their choices before moving to the next question.
+
+**`question-container.jsx`**: Renders the current Kanji or Kana to translate as well as the Finalize and Next buttons. Font size for the question is calculated dynamically based on the number of characters in the string to ensure that it fits on the screen. The Finalize button only activates once the `readyToFinalize` state is set to `true` and the Next button only shows once the answers are finalized.
+
+**`answer-choices.jsx`**: Renders a set of 5 answer options to select from. Chooses different prompts and different fonts based on whether it is displaying English characters (`Quicksand`) or Japanese characters (`Klee One`).
 
 ## Word List Format
 
