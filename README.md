@@ -39,15 +39,6 @@ src/
 
 ## Key Components
 
-**`Word`** — Represents a vocabulary entry with `kanji`, `kana`, and `english` fields. Contains static helpers for:
-- Parsing the word list from `wordList.json` (`loadWordsFromJSONFile`)
-- Generating randomized multiple-choice answer sets (`getAnswerChoices`)
-- Locating the correct answer within a choices array (`findCorrectIndex`)
-
-**`AnswerChoices`** — Renders a set of answer buttons that visually reflect their current state: neutral, selected (pre-finalize), correct, or incorrect (post-finalize).
-
-**`Game`** — The root React component managing all game state: the current word, chosen answers, finalization status, and advancing to the next random question.
-
 **`game.jsx`**: Handles the core game logic and passes necessary state variables to the requisite components. Tracks progression logic, the current deck, the set of answers in both `kana` and `english`, and the current card. The `readyToFinalize` and `finalized` state variables determine if all necessary answers have been selected, and if the user has locked in their choices before moving to the next question.
 
 **`question-container.jsx`**: Renders the current Kanji or Kana to translate as well as the Finalize and Next buttons. Font size for the question is calculated dynamically based on the number of characters in the string to ensure that it fits on the screen. The Finalize button only activates once the `readyToFinalize` state is set to `true` and the Next button only shows once the answers are finalized.
