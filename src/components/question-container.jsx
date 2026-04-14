@@ -5,7 +5,12 @@ export default function QuestionContainer({readyToFinalize, handleFinalize, hand
     // calculate the size of the question font
     // calculated based on text length
     // max size is 100px
-    const fontSize = Math.floor(Math.min(100, 540 / children.length));
+    const fontSizeLarge = Math.floor(Math.min(100, 540 / children.length));
+    // use a different size if on mobile
+    console.log(window.innerWidth);
+    const fontSizeMobile = Math.floor(Math.min(100, 300 / children.length));
+    // set the actual font size based on the size of the screen
+    const fontSize = (window.innerWidth < 700) ? fontSizeMobile : fontSizeLarge;
     
     return (
         <>

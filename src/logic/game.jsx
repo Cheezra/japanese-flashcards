@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import GameComponent from '../components/game-component';
+import ProgressBar from '../components/progress-bar';
 import QuestionContainer from '../components/question-container';
 import AnswerChoices from '../components/answer-choices';
 import wordList from '../wordList.json';
@@ -92,8 +93,15 @@ export default function Game() {
         loadCard(0);
     }
 
+    const progress = deckIndex / deck.length * 100;
+
     return (
         <GameComponent>
+            <ProgressBar 
+                progress={progress} 
+                index={deckIndex}
+                numCards={deck.length}
+            />
             <QuestionContainer 
                 readyToFinalize={readyToFinalize}
                 handleFinalize={finalizeAnswers}

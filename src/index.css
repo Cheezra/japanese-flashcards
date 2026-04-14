@@ -40,10 +40,34 @@
     display: flex;
     flex-direction: row;
     text-align: center;
-    align-items: last baseline;
     width: 100%;
     clear: both;
     position: relative;
+}
+
+.progress-track {
+    width: 45%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255, 0.4);
+    justify-content: center;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 5px;
+    background-color: var(--accent-color);
+    transition: all 0.15s ease;
+}
+
+.progress-counter {
+    width: 45%;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    color: var(--text-color);
+    opacity: 0.75;
+    transition: color 0.4s;
 }
 
 .question-text {
@@ -72,15 +96,51 @@
     box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.08);
 }
 
+.finalize-button, .next-button {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 25%;
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    text-align: center;
+    border: none;
+    border-radius: 30px;
+    height: 100px;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+    transition: all 0.15s ease;
+}
+.finalize-button:hover:not(:disabled), .next-button:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.15);
+}
+.finalize-button:active:not(:disabled), .next-button:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.12);
+}
+.finalize-button:disabled, .next-button:disabled {
+    background-color: color-mix(in srgb, var(--secondary-color), transparent 80%);
+    color: color-mix(in srgb, var(--text-color), transparent 80%);
+    cursor: default;
+}
+
 .answer-section {
     display: flex;
     flex-direction: row;
     gap: 100px;
+    width: 100%;
+    justify-content: center;
 }
 
 .answer-container {
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .answer-box {
@@ -97,8 +157,10 @@
 }
 
 .answer.japanese {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 500;
+    align-items: center;
+    line-height: 10px;
 }
 
 .answer {
@@ -149,41 +211,6 @@
     opacity: 0.7;
 }
 
-.finalize-button, .next-button {
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    cursor: pointer;
-    width: 25%;
-    position: absolute;
-    right: 20px;
-    bottom: 10px;
-    text-align: center;
-    border: none;
-    border-radius: 30px;
-    padding: 0 10px;
-    line-height: 40px;
-    height: 100px;
-    transition: all 0.15s ease;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
-    color: var(--text-color);
-    background-color: var(--secondary-color);
-}
-.finalize-button:hover:not(:disabled), .next-button:hover:not(:disabled) {
-    transform: translate(-1px, -1px);
-    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.15);
-}
-.finalize-button:active:not(:disabled), .next-button:active:not(:disabled) {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.12);
-}
-.finalize-button:disabled, .next-button:disabled {
-    background-color: color-mix(in srgb, var(--secondary-color), transparent 80%);
-    color: color-mix(in srgb, var(--text-color), transparent 80%);
-    cursor: default;
-}
-
 .game-component {
     background-color: var(--primary-color);
     position: relative;
@@ -195,4 +222,42 @@
     gap: 16px;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 700px) {
+    .progress-counter {
+        width: 80%;
+    }
+    
+    .progress-track {
+        width: 80%;
+    }
+
+    .question-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .question-kanji, .question-kana {
+        width: 80%;
+    }
+
+    .finalize-button, .next-button {
+        align-self: self-end;
+        margin-right: 5vw;
+        height: 3em;
+        width: 50%;
+        position: relative;
+    }
+
+    .answer-section {
+        gap: 10px;
+    }
+
+    .answer.english {
+        font-size: 15px;
+    }
+    .answer.japanese {
+        font-size: 20px;
+    }
 }
